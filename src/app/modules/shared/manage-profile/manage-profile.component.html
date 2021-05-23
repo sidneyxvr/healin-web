@@ -1,0 +1,68 @@
+<div class="content-list itens-3">
+    
+    <h3>Gerenciar Conta</h3>
+    <hr />
+
+    <div class="d-flex" *ngIf="verticalMenu">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+            <li ngbNavItem="profile" *ngIf="role !== 'Admin'">
+                <a ngbNavLink>Perfil</a>
+                <ng-template ngbNavContent>
+                    <app-edit-profile></app-edit-profile>
+                </ng-template>
+            </li>
+            <li ngbNavItem="address" *ngIf="role !== 'Admin'">
+                <a ngbNavLink>Endereço</a>
+                <ng-template ngbNavContent>
+                    <app-edit-address></app-edit-address>
+                </ng-template>
+            </li>
+            <li ngbNavItem="change-password">
+                <a ngbNavLink>Alterar Senha</a>
+                <ng-template ngbNavContent>
+                    <app-change-password></app-change-password>
+                </ng-template>
+            </li>
+            <li ngbNavItem="deactivate-account" *ngIf="role !== 'Admin'">
+                <a ngbNavLink>Desativar Conta</a>
+                <ng-template ngbNavContent>
+                    <app-deactivate-account></app-deactivate-account>
+                </ng-template>
+            </li>
+        </ul>
+    
+        <div [ngbNavOutlet]="nav" class="ml-4"></div>
+    </div>
+
+
+    <div *ngIf="!verticalMenu">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" style="justify-content: center; max-width: 500px; margin: auto; margin-bottom: 15px;">
+            <li ngbNavItem="profile" *ngIf="role !== 'Admin'">
+                <a ngbNavLink class="navigation-item"><i class="fas fa-user"></i></a>
+                <ng-template ngbNavContent>
+                    <app-edit-profile></app-edit-profile>
+                </ng-template>
+            </li>
+            <li ngbNavItem="address" *ngIf="role !== 'Admin'">
+                <a ngbNavLink class="navigation-item"><i class="fas fa-map-marker-alt"></i></a>
+                <ng-template ngbNavContent>
+                    <app-edit-address></app-edit-address>
+                </ng-template>
+            </li>
+            <li ngbNavItem="change-password">
+                <a ngbNavLink class="navigation-item"><i class="fas fa-key"></i></a>
+                <ng-template ngbNavContent>
+                    <app-change-password></app-change-password>
+                </ng-template>
+            </li>
+            <li ngbNavItem="deactivate-account" *ngIf="role !== 'Admin'">
+                <a ngbNavLink class="navigation-item"><i class="fas fa-power-off"></i></a>
+                <ng-template ngbNavContent>
+                    <app-deactivate-account></app-deactivate-account>
+                </ng-template>
+            </li>
+        </ul>
+    
+        <div [ngbNavOutlet]="nav"></div>
+    </div>
+</div>

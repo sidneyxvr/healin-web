@@ -1,0 +1,21 @@
+<div id="princial">
+    <div class="d-flex justify-content-between">
+        <h2 class="text-primary">Desativar Conta</h2>
+        <div></div>
+    </div>
+    <div>
+        <dl class="row" *ngIf="user">
+            <dt class="col-md-4">Nome</dt>
+            <dd class="col-md-8">{{ user.name }}</dd>
+            <dt class="col-md-4">Email</dt>
+            <dd class="col-md-8">{{ user.email }}</dd>
+            <dt class="col-md-4">Sexo</dt>
+            <dd class="col-md-8">{{ user.genderDescription }}</dd>
+            <dt class="col-md-4">Data de Nascimento</dt>
+            <dd class="col-md-8">{{ user.birthDate | date:'dd/MM/yyyy' }}</dd>
+        </dl>
+        <div class="d-flex align-items-end flex-column">
+            <a class="btn btn-danger" (click)="onSubmit()"><span style="color: white;">Desativar conta</span></a>
+        </div> 
+    </div>
+</div>

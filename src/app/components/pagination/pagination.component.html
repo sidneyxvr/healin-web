@@ -1,0 +1,15 @@
+<span id="shown"> {{ (page - 1) * pageSize + 1 }} - {{ shown || 0 }} de {{ collectionSize }} resultados </span>
+<div class="d-flex justify-content-center">
+    <ngb-pagination 
+        [collectionSize]="collectionSize" 
+        [(page)]="page" 
+        [pageSize]="pageSize" 
+        [maxSize]="3" 
+        [rotate]="true" 
+        (pageChange)="get()">
+        <ng-template ngbPaginationPrevious> <i class="fas fa-chevron-left"></i> </ng-template>
+        <ng-template ngbPaginationNext> <i class="fas fa-chevron-right"></i> </ng-template>
+        <ng-template ngbPaginationEllipsis>...</ng-template>
+        <ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+    </ngb-pagination>
+</div>

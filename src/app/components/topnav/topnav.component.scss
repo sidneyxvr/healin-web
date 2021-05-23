@@ -1,0 +1,17 @@
+@media screen and (min-width: 992px){
+    .drop-item{
+        position: fixed;
+        right: 20px;
+    }   
+}
+
+ul li{
+    margin-bottom: 0;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+}

@@ -1,0 +1,53 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a [routerLink]="['/']" routerLinkActive="router-link-active" class="navbar-brand"><img src="/assets/images/logo.png" style="height: 30px;"/></a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a [routerLink]="['/']" routerLinkActive="router-link-active" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Admin'">
+          <a [routerLink]="['/admin/exam/list']" routerLinkActive="router-link-active" class="nav-link">Exames</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Admin'">
+          <a [routerLink]="['/admin/exam-type/list']" routerLinkActive="router-link-active" class="nav-link">Tipos de Exame</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Admin'">
+          <a [routerLink]="['/admin/vaccine/list']" routerLinkActive="router-link-active" class="nav-link">Vacinas</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Admin'">
+          <a [routerLink]="['/admin/specialty/list']" routerLinkActive="router-link-active" class="nav-link">Especialidades</a>
+        </li>
+
+        <li class="nav-item" *ngIf="role === 'Patient'">
+          <a [routerLink]="['/patient/exam-result/list']" routerLinkActive="router-link-active" class="nav-link">Resultado de Exames</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Patient'">
+          <a [routerLink]="['/patient/prescription/list']" routerLinkActive="router-link-active" class="nav-link">Receituários</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Patient'">
+          <a [routerLink]="['/patient/vaccine-card/list']" routerLinkActive="router-link-active" class="nav-link">Cartão de Vacina</a>
+        </li>
+        <li class="nav-item" *ngIf="role === 'Patient'">
+          <a [routerLink]="['/patient/doctor/list']" routerLinkActive="router-link-active" class="nav-link">Médicos</a>
+        </li>
+
+        <li class="nav-item" *ngIf="role === 'Doctor'">
+          <a [routerLink]="['/doctor/patient/list']" routerLinkActive="router-link-active" class="nav-link">Pacientes</a>
+        </li>
+
+        <li class="nav-item" ngbDropdown display="dynamic" class="drop-item">
+          <a class="nav-link" tabindex="0" ngbDropdownToggle id="navbarDropdown3" role="button" style="cursor: pointer;">{{displayName}}</a>
+          <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+            <a class="dropdown-item c-pointer" [routerLink]="['/manage-profile']" routerLinkActive="router-link-active" >Perfil</a>
+            <a class="dropdown-item c-pointer" (click)="onSignOut()">Sair</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

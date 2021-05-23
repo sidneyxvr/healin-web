@@ -1,0 +1,70 @@
+<div id="princial">
+<div class="d-flex justify-content-center">
+    <div>
+        <img id="logo" [src]="imageSrc" class="imagem-perfil" (error)="erroImagem($event)"/>
+        <div id="camera" (click)="abrirBuscadorArquivo($event)">
+            <i class="fas fa-camera"></i>
+        </div>
+        <!-- <input type="file" id="imagem" (change)="onFileChange($event)" hidden> -->
+    </div>
+    <div style="padding-left: 20px;">
+        <input type="file" id="imagem" (change)="fileChangeEvent($event)" hidden>
+        <image-cropper
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 4"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+            [style.display]="showCropper ? null : 'none'"
+        ></image-cropper>
+    </div>
+</div>
+<div>
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
+        <label class="form-group has-float-label">
+            <input class="form-control" type="text" formControlName="name"/>
+            <span>Nome</span>
+            <div *ngIf="form.get('name')?.errors?.required && form.get('name')?.touched" class="invalid-tooltip">Informe o nome</div>
+        </label>
+        <label class="form-group has-float-label">
+            <input class="form-control" type="text" name="cpf" cpf [textMask]="{mask: MASKS.cpf.textMask}" formControlName="cpf" />
+            <span>CPF</span>
+            <div *ngIf="form.get('cpf')?.errors?.required && form.get('cpf')?.touched" class="invalid-tooltip">Informe o CPF</div>
+            <div *ngIf="form.get('cpf')?.errors?.cpf && form.get('cpf')?.touched" class="invalid-tooltip">CPF inválido</div>
+        </label>
+        <label class="form-group has-float-label" *ngIf="role === 'Doctor'">
+            <input class="form-control" type="text" name="crm" formControlName="crm" />
+            <span>CRM</span>
+            <div *ngIf="form.get('crm')?.errors?.required && form.get('crm')?.touched" class="invalid-tooltip">Informe o CRM</div>
+        </label>
+        <label class="form-group has-float-label" *ngIf="role === 'Patient'">
+            <input class="form-control" type="text" name="susNumber" formControlName="susNumber" />
+            <span>Número do SUS</span>
+        </label>
+        <label class="form-group has-float-label">
+            <input autocomplete="off" class="form-control" [container]="'html'" bsDatepicker #dp="bsDatepicker" name="birthDate" formControlName="birthDate">
+            <span>Data de Nascimento</span>
+            <div *ngIf="form.get('birthDate')?.errors?.required && form.get('birthDate')?.touched" class="invalid-tooltip">Informe a data de nascimento</div>
+        </label>
+        <label class="form-group has-float-label">
+            <input class="form-control" type="text" name="telefone" telefone #telefone [textMask]="{mask: MASKS.telefone.textMaskFunction}" formControlName="phone" />
+            <span>Telefone</span>
+            <div *ngIf="form.get('phone')?.errors?.telefone && form.get('phone')?.touched" class="invalid-tooltip">Telefone inválido</div>
+        </label>
+        <label class="form-group has-float-label">
+            <ng-select [items]="genders" bindLabel="name" bindValue="id" name="gender" formControlName="gender"> </ng-select>
+            <span>Sexo</span>
+            <div *ngIf="form.get('gender')?.errors?.required && form.get('gender')?.touched" class="invalid-tooltip">Informe o sexo</div>
+        </label>
+        <div class="text-center">
+          <button type="submit" [disabled]="loading" class="btn btn-primary">
+            {{ loading ? 'Salvando' : 'Salvar' }}
+            <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+          </button>
+        </div>
+      </form>
+</div>
+</div>

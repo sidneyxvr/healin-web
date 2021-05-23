@@ -1,0 +1,41 @@
+<div id="principal">
+    <div class="d-flex justify-content-between">
+        <a [routerLink]="['/patient/prescription/list']" routerLinkActive="router-link-active" >
+          <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+          </div>
+        </a>
+        <h2 class="text-primary"> Editar Prescrição Médica</h2>
+        <div></div>
+    </div>
+    <div>
+        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="editForm">
+          <label class="form-group has-float-label">
+            <input class="form-control" type="text" formControlName="description"/>
+            <span>Descrição</span>
+            <div *ngIf="editForm.get('description')?.errors?.required && editForm.get('description')?.touched" class="invalid-tooltip">Informa a descrição</div>
+          </label>
+          <label class="form-group has-float-label">
+            <input autocomplete="off" class="form-control" [maxDate]="date" [container]="'html'" bsDatepicker #dp="bsDatepicker" name="prescriptionDate" formControlName="prescriptionDate">
+            <span>Data da Consulta</span>
+            <div *ngIf="editForm.get('prescriptionDate')?.errors?.required && editForm.get('prescriptionDate')?.touched" class="invalid-tooltip">Informa a data da consulta</div>
+          </label>
+          <label class="form-group has-float-label">
+              <ng-select [items]="specialties" [searchable]="false" bindLabel="text" bindValue="value" name="specialtyId" formControlName="specialtyId"> </ng-select>
+              <span>Especialidade</span>
+              <div *ngIf="editForm.get('specialtyId')?.errors?.required && editForm.get('specialtyId')?.touched" class="invalid-tooltip">Selecione uma especialidade</div>
+          </label>
+          <label class="form-group has-float-label">
+              <ng-select [items]="prescriptionTypes" [searchable]="false" bindLabel="text" bindValue="value" name="prescriptionType" formControlName="prescriptionType"> </ng-select>
+              <span>Tipo do Receituário</span>
+              <div *ngIf="editForm.get('prescriptionType')?.errors?.required && editForm.get('prescriptionType')?.touched" class="invalid-tooltip">Selecione o tipo do receituário</div>
+          </label>
+          <div class="text-center">
+            <button type="submit" [disabled]="loading || editForm.invalid || !editForm.dirty" class="btn btn-primary">
+              {{ loading ? 'Salvando' : 'Salvar' }}
+              <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+            </button>
+          </div>
+        </form>
+    </div>
+</div>

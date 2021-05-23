@@ -1,0 +1,31 @@
+<div id="princial">
+    <div class="d-flex justify-content-between">
+        <a [routerLink]="['/admin/vaccine/list']" routerLinkActive="router-link-active" >
+          <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+          </div>
+        </a>
+        <h2 class="text-primary">Editar Vacina</h2>
+        <div></div>
+    </div>
+    <div>
+    <form novalidate (ngSubmit)="onSubmit()" [formGroup]="editForm">
+        <label class="form-group has-float-label">
+            <input class="form-control" type="text" formControlName="name" />
+            <span>Nome</span>
+            <div *ngIf="editForm.get('name')?.errors?.required && editForm.get('name')?.touched" class="invalid-tooltip">Informe o nome</div>
+            <div *ngIf="editForm.get('name')?.errors?.maxLength && editForm.get('name')?.touched" class="invalid-tooltip">O nome de ter no máximo 50 caracteres</div>
+        </label>
+        <div class="custom-control custom-checkbox mb-4">
+            <input type="checkbox" id="active" class="custom-control-input" formControlName="isActive"/>
+            <label for="active" class="custom-control-label">Ativo</label>
+        </div>
+        <div class="text-center">
+            <button type="submit" [disabled]="loading || editForm.invalid || !editForm.dirty" class="btn btn-primary">
+            {{ loading ? 'Salvando' : 'Salvar' }}
+            <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+            </button>
+        </div>
+        </form>
+    </div>
+</div>

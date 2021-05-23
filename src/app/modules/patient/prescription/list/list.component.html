@@ -1,0 +1,61 @@
+<div class="content-list itens-5">
+
+    <h2>Receituários Médico</h2>
+
+    <app-search 
+        [orderItems]="orderOptions" 
+        [(order)]="order"
+        [(pageSize)]="pageSize"
+        [(search)]="search"
+        (get)="getPaged()"
+        [createRouter]="'/patient/prescription/create'">
+    </app-search>
+
+    <div class="table">
+        <div class="thead">
+            <div class="row">
+                <div class="col-md-3 p-2">Descrição</div>
+                <div class="col-md-2 p-2">Data da Consulta</div>
+                <div class="col-md-2 p-2">Especialidade</div>
+                <div class="col-md-2 p-2">Tipo da Receita</div>
+                <div class="col-md-3 p-2"></div>
+            </div>
+        </div>
+        <div class="tbody">
+            <div class="row" *ngFor="let prescription of prescriptions" style="position: relative;">
+                <div class="ccard col-md-3 p-2">
+                    <div class="col-card">Descrição</div>
+                    <div class="dado max-1-lines" [title]="prescription.description">{{ prescription.description }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Data da Consulta</div>
+                    <div class="dado">{{ prescription.prescriptionDate | date: 'dd/MM/yyyy' }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Especialidade</div>
+                    <div class="dado">{{ prescription.specialty.text }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Tipo da Receita</div>
+                    <div class="dado max-1-lines">{{prescription.prescriptionTypeDescription}}</div>
+                </div>
+                <div class="ccard col-md-3 actions">
+                    <a title="Visualizar PDF" target="_blank" [href]="prescription.filePath"><i class="fas fa-file-pdf"></i></a>
+                    <a title="Remover" href="javascript:;" (click)="abrirDialogoConfirmacao(prescription.id)"><i class="fas fa-trash"></i></a>
+                    <a title="Editar" [routerLink]="['/patient/prescription/edit', prescription.id]" routerLinkActive="router-link-active"><i class="fas fa-pen"></i></a>
+                </div>
+                <div ngbDropdown class="actions-mobile">
+                    <a href="javascript:;" tabindex="0" ngbDropdownToggle><i class="fas fa-ellipsis-h"></i></a>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-box">
+                        <a title="Visualizar PDF" target="_blank" [href]="prescription.filePath"><i class="fas fa-file-pdf"></i> PDF</a><br /><br />
+                        <a title="Remover" href="javascript:;" (click)="abrirDialogoConfirmacao(prescription.id)"><i class="fas fa-trash"></i> Excluir</a><br /><br />
+                        <a title="Editar" [routerLink]="['/patient/prescription/edit', prescription.id]" routerLinkActive="router-link-active"><i class="fas fa-pen"></i> Editar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-pagination *ngIf="amount > 0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="amount" (getPaged)="getPaged()"></app-pagination>
+
+</div>

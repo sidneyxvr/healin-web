@@ -1,0 +1,63 @@
+<div class="content-list itens-5">
+
+    <h2>Resultados de Exames</h2>
+
+    <app-search 
+        [orderItems]="orderOptions" 
+        [(order)]="order"
+        [(pageSize)]="pageSize"
+        [(search)]="search"
+        (get)="getPaged()"
+        [createRouter]="'/patient/exam-result/create'">
+    </app-search>
+
+    <div class="table">
+        <div class="thead">
+            <div class="row">
+                <div class="col-md-2 p-2">Descrição</div>
+                <div class="col-md-2 p-2">Exame</div>
+                <div class="col-md-2 p-2">Data do Exame</div>
+                <div class="col-md-3 p-2">Tipos de Exame</div>
+                <div class="col-md-3 p-2"></div>
+            </div>
+        </div>
+        <div class="tbody">
+            <div class="row" *ngFor="let examResult of examResults" style="position: relative;">
+                <div class="ccard col-md-2 p-2">
+                    <ng-template #tipDescription><span>{{ examResult.description }}</span></ng-template>
+                    <div class="col-card">Descrição</div>
+                    <div class="dado max-1-line" [ngbTooltip]="tipDescription">{{ examResult.description }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Exame</div>
+                    <div class="dado" [title]="examResult.exam">{{ examResult.exam }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Data do Exame</div>
+                    <div class="dado">{{ examResult.examDate | date: 'dd/MM/yyyy' }}</div>
+                </div>
+                <div class="ccard col-md-3 p-2">
+                    <ng-template #tipExamTypes><span class="badge badge-info" *ngFor="let examType of examResult.examTypes">{{ examType.text }}</span></ng-template>
+                    <div class="col-card">Tipos de Exame</div>
+                    <div class="dado max-1-line" [ngbTooltip]="tipExamTypes"><span class="badge badge-info" *ngFor="let examType of examResult.examTypes">{{ examType.text }}</span></div>
+                </div>
+                <div class="ccard col-md-3 actions">
+                    <a title="Visualizar PDF" target="_blank" [href]="examResult.filePath"><i class="fas fa-file-pdf"></i></a>
+                    <a title="Remover" href="javascript:;" (click)="abrirDialogoConfirmacao(examResult.id)"><i class="fas fa-trash"></i></a>
+                    <a title="Editar" [routerLink]="['/patient/exam-result/edit', examResult.id]" routerLinkActive="router-link-active"><i class="fas fa-pen"></i></a>
+                </div>
+                <div ngbDropdown class="actions-mobile">
+                    <a href="javascript:;" tabindex="0" ngbDropdownToggle><i class="fas fa-ellipsis-h"></i></a>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-box">
+                        <a title="Visualizar PDF" target="_blank" [href]="examResult.filePath"><i class="fas fa-file-pdf"></i> PDF</a><br /><br />
+                        <a title="Remover" href="javascript:;" (click)="abrirDialogoConfirmacao(examResult.id)"><i class="fas fa-trash"></i> Excluir</a><br /><br />
+                        <a title="Editar" [routerLink]="['/patient/exam-result/edit', examResult.id]" routerLinkActive="router-link-active"><i class="fas fa-pen"></i> Editar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-pagination *ngIf="amount > 0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="amount" (getPaged)="getPaged()"></app-pagination>
+
+</div>

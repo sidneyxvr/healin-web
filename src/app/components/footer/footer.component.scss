@@ -1,0 +1,10 @@
+@media screen and (max-width: 651px){
+    footer.page-footer{
+        display: none !important;
+    }
+}
+
+footer.page-footer{
+    padding: 10px 0;
+    height: auto;
+}

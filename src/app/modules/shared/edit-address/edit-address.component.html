@@ -1,0 +1,51 @@
+<div id="princial">
+    <h2 class="text-primary">Endereço</h2>
+    <div>
+        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
+            <label class="form-group has-float-label">
+                <input class="form-control" type="text" formControlName="postalCode" cep [textMask]="{mask: MASKS.cep.textMask}" (change)="getAddressByPostalCode($event)"/>
+                <span>CEP</span>
+                <div *ngIf="form.get('postalCode')?.errors?.required && form.get('postalCode')?.touched" class="invalid-tooltip">Informe o cep</div>
+            </label>
+            <label class="form-group has-float-label">
+                <input class="form-control" type="text" formControlName="street" />
+                <span>Logradouro</span>
+                <div *ngIf="form.get('street')?.errors?.required && form.get('street')?.touched" class="invalid-tooltip">Informe o logradouro</div>
+                <div *ngIf="form.get('street')?.errors?.maxLength && form.get('street')?.touched" class="invalid-tooltip">O logradouro deve ter no máximo 50 caracteres</div>
+            </label>
+            <label class="form-group has-float-label">
+                <input class="form-control" type="text" formControlName="number" />
+                <span>Número</span>
+                <div *ngIf="form.get('number')?.errors?.maxLength && form.get('number')?.touched" class="invalid-tooltip">O número deve ter no máximo 5 caracteres</div>
+            </label>
+            <label class="form-group has-float-label">
+                <input class="form-control" type="text" formControlName="district" />
+                <span>Bairro</span>
+                <div *ngIf="form.get('district')?.errors?.required && form.get('district')?.touched" class="invalid-tooltip">Informe o bairro</div>
+                <div *ngIf="form.get('district')?.errors?.maxLength && form.get('district')?.touched" class="invalid-tooltip">O bairro deve ter no máximo 50 caracteres</div>
+            </label>
+            <label class="form-group has-float-label">
+                <input class="form-control" type="text" formControlName="city" />
+                <span>Cidade</span>
+                <div *ngIf="form.get('city')?.errors?.required && form.get('city')?.touched" class="invalid-tooltip">Informe a cidade</div>
+                <div *ngIf="form.get('city')?.errors?.maxLength && form.get('city')?.touched" class="invalid-tooltip">A cidade deve ter no máximo 40 caracteres</div>
+            </label>
+            <label class="form-group has-float-label">
+                <ng-select [items]="states" [searchable]="false" bindLabel="text" bindValue="value" name="state" formControlName="state"> </ng-select>
+                <span>Estado</span>
+                <div *ngIf="form.get('state')?.errors?.required && form.get('state')?.touched" class="invalid-tooltip">Informe o estado</div>
+            </label>
+            <label class="form-group has-float-label">
+                <input class="form-control" type="text" formControlName="complement" />
+                <span>Complemento</span>
+                <div *ngIf="form.get('complement')?.errors?.maxLength && form.get('complement')?.touched" class="invalid-tooltip">O complemento deve ter no máximo 50 caracteres</div>
+            </label>
+            <div class="text-center">
+              <button type="submit" [disabled]="loading" class="btn btn-primary">
+                {{ loading ? 'Salvando' : 'Salvar' }}
+                <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+              </button>
+            </div>
+          </form>
+    </div>
+</div>

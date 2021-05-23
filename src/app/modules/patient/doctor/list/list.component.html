@@ -1,0 +1,49 @@
+<div class="content-list itens-3">
+
+    <h2>Médicos</h2>
+
+    <app-search 
+        [orderItems]="orderOptions" 
+        [(order)]="order"
+        [(pageSize)]="pageSize"
+        [(search)]="search"
+        (get)="getPaged()"></app-search>
+    <div>
+        <div class="table">
+            <div class="thead">
+                <div class="row">
+                    <div class="col-sm-2 p-2"></div>
+                    <div class="col-sm-5 p-2">Nome</div>
+                    <div class="col-sm-3 p-2">CRM</div>
+                    <div class="col-sm-2 p-2"></div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="row" *ngFor="let doctor of doctors">
+                    <div class="ccard col-sm-2 p-2 image-card">
+                        <ng-template #tipImage><img [src]="sourceFileUrlV1 + doctor.imagePath" (error)="errorHandler($event)" style="width: 150px; height: 150px;"/></ng-template>
+                        <div class="dado" *ngIf="!doctor.imagePath"><img [src]="sourceFileUrlV1 + doctor.imagePath" (error)="errorHandler($event)"/></div>
+                        <div class="dado" [ngbTooltip]="tipImage" *ngIf="doctor.imagePath"><img [src]="sourceFileUrlV1 + doctor.imagePath" (error)="errorHandler($event)"/></div>
+                    </div>
+                    <div class="ccard col-sm-5 p-2">
+                        <div class="col-card">Nome</div>
+                        <div class="dado">{{ doctor.name }}</div>
+                    </div>
+                    <div class="ccard col-sm-3 p-2">
+                        <div class="col-card">CRM</div>
+                        <div class="dado">{{ doctor.crm }}</div>
+                    </div>
+                    <div class="ccard col-sm-2 actions" style="position: relative;">
+                        <a href="javascrip:;" routerLinkActive="router-link-active" (click)="changeDoctorPermission(doctor.id)" id="eye">
+                            <i class="fas fa-eye" *ngIf="doctor.marked" title="Pode visualizar"></i>
+                            <i class="fas fa-eye-slash" *ngIf="!doctor.marked" title="Não pode visualizar"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <app-pagination *ngIf="amount > 0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="amount" (getPaged)="getPaged()"></app-pagination> -->
+
+</div>

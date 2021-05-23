@@ -1,0 +1,28 @@
+<div id="content">
+    <h2>Pacientes</h2>
+
+    <app-search 
+        [orderItems]="orderOptions" 
+        [(order)]="order"
+        [(search)]="search"
+        (get)="getPaged()">
+    </app-search>
+
+    <div *ngIf="patients" class="row m-auto">
+        <div *ngFor="let patient of patients" >
+            <div class="card" style="width: 250px;">
+                <img [src]="patient.imagePath" class="card-img-top" (error)="errorHandler($event)">
+                <div class="card-body text-center" style="padding-top: 0;">
+                    <div id="patient-name">
+                        <ng-template #tipName><span>{{ patient.name }}</span></ng-template>
+                        <h5 [ngbTooltip]="tipName" class="max-1-line">{{ patient.name }}</h5>    
+                        <h6 style="color: #a5a5a5;">{{ patient.birthDate | date:'dd/MM/yyyy' }}</h6>
+                    </div>
+                <a href="javascript:;" class="btn btn-primary" [routerLink]="['/doctor/patient-medical-history/', patient.id]" routerLinkActive="router-link-active" style="margin-top: 20px;">Visualizar Histórico</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-pagination *ngIf="amount > 0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="amount" (getPaged)="getPaged()"></app-pagination>
+</div>

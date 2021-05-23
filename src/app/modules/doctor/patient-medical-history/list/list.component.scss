@@ -1,0 +1,80 @@
+@import '../../../../../variables';
+
+#patient{
+    margin: auto;
+    text-align: center;
+
+    img{
+        margin: 10px;
+        width: 150px;
+        height: 150px;
+        border-radius: 100px;
+    }
+}
+
+
+@media screen and (min-width: 768px){
+    .max-1-lines{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical;
+    }
+
+    .actions-mobile{
+        display: none;
+    }
+}
+
+
+.col-card{
+    color: darken($muted-text-color, 20%);
+    font-weight: 600;
+}
+
+.acao-descricao{
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .col-card{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+
+    div.table{
+        display: flex;
+        justify-content: center;
+    }
+
+    div.thead{
+        display: none;
+    }
+
+    .col-card{
+        display: block;
+    }
+
+    div.tbody{
+        max-width: 500px;
+        .col-md{
+            text-align: center;
+        }
+
+        .row{
+            padding: 20px;
+        }
+    }
+
+    .ccard{
+        text-align: left !important;
+        display: inline-flex;
+        div{
+            min-width: 150px;
+        }
+    }
+}

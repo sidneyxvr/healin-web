@@ -1,0 +1,43 @@
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+
+#title{
+    margin-top: 40px;
+    
+    h5{
+        color: gray;
+    }
+}
+
+#choose{
+    @media (max-width: $breakpoint-sm) {
+        flex-direction: column !important;
+    }
+    margin-bottom: 40px;
+}
+
+form{
+    margin-top: 40px;
+}
+
+.image-side{
+    @media (max-width: $breakpoint-md) {
+        height: 0;
+        padding: 0;
+        width: 0;
+    }
+}
+
+.patient{ 
+    @media (min-width: $breakpoint-md) {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-image: url('/assets/images/escolhido-paciente.png');
+    }
+}
+
+.back{
+    font-size: 2em;
+    margin-top: 14px;
+}

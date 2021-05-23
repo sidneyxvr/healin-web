@@ -1,0 +1,48 @@
+<div id="principal">
+    <div class="d-flex justify-content-between">
+        <a [routerLink]="['/patient/exam-result/list']" routerLinkActive="router-link-active" >
+          <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+          </div>
+        </a>
+        <h2 class="text-primary"> Novo Resultado de Exame</h2>
+        <div></div>
+    </div>
+    <div>
+      <form novalidate (ngSubmit)="onSubmit()" [formGroup]="createForm">
+        <label class="form-group has-float-label">
+          <input class="form-control" type="text" formControlName="description" />
+          <span>Descrição</span>
+          <div *ngIf="createForm.get('description')?.errors?.required && createForm.get('description')?.touched" class="invalid-tooltip">Informe a descrição</div>
+        </label>
+        <label class="form-group has-float-label">
+          <input autocomplete="off" class="form-control" [maxDate]="date" [container]="'html'" bsDatepicker #dp="bsDatepicker" name="examDate" formControlName="examDate">
+          <span>Data do Exame</span>
+          <div *ngIf="createForm.get('examDate')?.errors?.required && createForm.get('examDate')?.touched" class="invalid-tooltip">Informe a data do exame</div>
+        </label>
+        <label class="form-group has-float-label">
+          <ng-select [items]="exams" [searchable]="false" bindLabel="text" bindValue="value" name="examId" formControlName="examId" (change)=getExamTypes($event)> </ng-select>
+          <span>Exame</span>
+          <div *ngIf="createForm.get('examId')?.errors?.required && createForm.get('examId')?.touched" class="invalid-tooltip">Selecione um exame</div>
+        </label>
+        <label class="form-group has-float-label">
+          <ng-select [multiple]="true" [items]="examTypes" [closeOnSelect]="false" [searchable]="true" bindLabel="text" bindValue="value" name="examTypeIds" formControlName="examTypeIds"> </ng-select>
+          <span>Tipos do Exame</span>
+          <div *ngIf="createForm.get('examTypeIds')?.errors?.required && createForm.get('examTypeIds')?.touched" class="invalid-tooltip">Selecione os tipos de exame</div>
+        </label>
+        <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+          <ngx-dropzone-label>Arraste ou clique para inserir arquivo</ngx-dropzone-label>
+          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+        <br />
+        <div class="text-center">
+          <button type="submit" [disabled]="loading || createForm.invalid" class="btn btn-primary">
+            {{ loading ? 'Salvando' : 'Salvar' }}
+            <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+</div>

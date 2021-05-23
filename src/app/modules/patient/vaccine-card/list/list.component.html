@@ -1,0 +1,22 @@
+<div class="content-list itens-3">
+    <div style="text-align: right;">
+        <a [routerLink]="['/patient/vaccine-card/create']" routerLinkActive="router-link-active" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Adicionar
+        </a>
+    </div>
+
+    <div *ngIf="doses">
+        <div *ngFor="let dose of doses" class="vaccine-card">
+            <h3>{{dose.item1}}</h3>
+            <div class="dose">
+                <div *ngFor="let vaccine of dose.item2" class="vaccine">
+                    <span>{{vaccine.doseTypeDescription}}</span><br>
+                    <h6>{{vaccine.doseDate | date:'dd/MM/yyyy'}}</h6>
+                    <div class="action">
+                        <a href="javascript:;" (click)="abrirDialogoConfirmacao(vaccine.id)"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>
+            <div>
+        </div>
+    </div>
+</div>

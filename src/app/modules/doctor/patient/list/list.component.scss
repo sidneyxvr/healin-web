@@ -1,0 +1,35 @@
+.card{
+    margin: 20px 20px 20px 0;
+    align-items: center;
+}
+#content{
+    max-width: 1200px;
+    // padding: 0 100px 0 100px;
+    margin: auto;
+}
+
+.card-img-top{
+    margin: 30px;
+    width: 120px;
+    border-radius: 100px;
+}
+
+.max-1-line{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical;
+}
+
+.row{
+    display: flex;
+    justify-content: center;    
+}
+
+@media screen and (max-width: 534px) {
+    .card{
+        margin: 20px 0;
+        align-items: center;
+    }
+}

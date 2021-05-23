@@ -1,0 +1,31 @@
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+
+#choose{
+    @media (max-width: $breakpoint-sm) {
+        flex-direction: column !important;
+    }
+    margin-bottom: 40px;
+}
+
+
+.profile{
+    @media (min-width: $breakpoint-sm) {
+        margin: 30px;
+    }
+    @media (max-width: $breakpoint-sm) {
+        margin: 10px;
+    }
+    align-items: center;
+    
+    img{
+        @media (min-width: $breakpoint-sm) {
+            max-width: 200px;
+            max-height: 400px;
+        }
+        @media (max-width: $breakpoint-sm) {
+            max-width: 150px;
+            max-height: 300px;
+        }
+    }
+}

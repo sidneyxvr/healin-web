@@ -1,0 +1,48 @@
+<div id="principal">
+    <div class="d-flex justify-content-between">
+        <a [routerLink]="['/patient/prescription/list']" routerLinkActive="router-link-active" >
+          <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+          </div>
+        </a>
+        <h2 class="text-primary"> Nova Prescrição Médica</h2>
+        <div></div>
+    </div>
+    <div>
+        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="createForm">
+            <label class="form-group has-float-label">
+              <input class="form-control" type="text" formControlName="description"/>
+              <span>Descrição</span>
+              <div *ngIf="createForm.get('description')?.errors?.required && createForm.get('description')?.touched" class="invalid-tooltip">Informa a descrição</div>
+            </label>
+            <label class="form-group has-float-label">
+              <input autocomplete="off" class="form-control" [maxDate]="date" [container]="'html'" bsDatepicker #dp="bsDatepicker" name="prescriptionDate" formControlName="prescriptionDate">
+              <span>Data da Consulta</span>
+              <div *ngIf="createForm.get('prescriptionDate')?.errors?.required && createForm.get('prescriptionDate')?.touched" class="invalid-tooltip">Informa a data da consulta</div>
+            </label>
+            <label class="form-group has-float-label">
+                <ng-select [items]="specialties" [searchable]="false" bindLabel="text" bindValue="value" name="specialtyId" formControlName="specialtyId"> </ng-select>
+                <span>Especialidade</span>
+                <div *ngIf="createForm.get('specialtyId')?.errors?.required && createForm.get('specialtyId')?.touched" class="invalid-tooltip">Selecione uma especialidade</div>
+            </label>
+            <label class="form-group has-float-label">
+                <ng-select [items]="prescriptionTypes" [searchable]="false" bindLabel="text" bindValue="value" name="prescriptionType" formControlName="prescriptionType"> </ng-select>
+                <span>Tipo do Receituário</span>
+                <div *ngIf="createForm.get('prescriptionType')?.errors?.required && createForm.get('prescriptionType')?.touched" class="invalid-tooltip">Selecione o tipo do receituário</div>
+            </label>
+            <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+              <ngx-dropzone-label>Arraste ou clique para inserir arquivo</ngx-dropzone-label>
+              <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>({{ f.type }})</ngx-dropzone-label>
+              </ngx-dropzone-preview>
+            </ngx-dropzone>
+            <br />
+            <div class="text-center">
+              <button type="submit" [disabled]="loading || createForm.invalid" class="btn btn-primary">
+                {{ loading ? 'Salvando' : 'Salvar' }}
+                <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+              </button>
+            </div>
+          </form>
+    </div>
+</div>

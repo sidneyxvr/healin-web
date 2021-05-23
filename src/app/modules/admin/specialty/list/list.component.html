@@ -1,0 +1,41 @@
+<div class="content-list itens-3">
+
+    <h2>Especialidades</h2>
+
+    <app-search 
+        [orderItems]="[{id: 'name', name: 'Nome'}, {id: 'created', name: 'Data de Cadastro'}]" 
+        [(order)]="order"
+        [(pageSize)]="pageSize"
+        [(search)]="search"
+        (get)="getPaged()"
+        [createRouter]="'/admin/specialty/create'"></app-search>
+    <div>
+        <div class="table">
+            <div class="thead">
+                <div class="row">
+                    <div class="col-sm-6 p-2">Nome</div>
+                    <div class="col-sm-4 p-2">Status</div>
+                    <div class="col-sm-2 p-2"></div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="row" *ngFor="let specialty of specialties">
+                    <div class="ccard col-sm-6 p-2">
+                        <div class="col-card">Nome</div>
+                        <div class="dado">{{ specialty.name }}</div>
+                    </div>
+                    <div class="ccard col-sm-4 p-2">
+                        <div class="col-card">Status</div>
+                        <div class="dado"><span [status]="specialty.isActive"></span></div>
+                    </div>
+                    <div class="ccard col-sm-2 actions">
+                        <a [routerLink]="['/admin/specialty/edit', specialty.id]" routerLinkActive="router-link-active"><i class="fas fa-pen"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-pagination *ngIf="amount > 0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="amount" (getPaged)="getPaged()"></app-pagination>
+
+</div>

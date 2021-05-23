@@ -1,0 +1,36 @@
+<div id="principal">
+    <div class="d-flex justify-content-between">
+        <a [routerLink]="['/patient/vaccine-card/list']" routerLinkActive="router-link-active" >
+          <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+          </div>
+        </a>
+        <h2 class="text-primary"> Nova Dose de Vacina</h2>
+        <div></div>
+    </div>
+    <div>
+        <form novalidate (ngSubmit)="onSubmit()" [formGroup]="createForm">
+            <label class="form-group has-float-label">
+                <ng-select [items]="vaccines" [searchable]="false" bindLabel="text" bindValue="value" name="vaccineId" formControlName="vaccineId"> </ng-select>
+                <span>Vacina</span>
+                <div *ngIf="createForm.get('vaccineId')?.errors?.required && createForm.get('vaccineId')?.touched" class="invalid-tooltip">Selecione a vacina</div>
+            </label>
+            <label class="form-group has-float-label">
+                <input autocomplete="off" class="form-control" [maxDate]="date" [container]="'html'" bsDatepicker #dp="bsDatepicker" name="doseDate" formControlName="doseDate">
+                <span>Data da Dose</span>
+                <div *ngIf="createForm.get('doseDate')?.errors?.required && createForm.get('doseDate')?.touched" class="invalid-tooltip">Informe a data que tomou a dose</div>
+            </label>
+            <label class="form-group has-float-label">
+                <ng-select [items]="doseTypes" [searchable]="false" bindLabel="text" bindValue="value" name="doseType" formControlName="doseType"> </ng-select>
+                <span>Tipo da Dose</span>
+                <div *ngIf="createForm.get('doseType')?.errors?.required && createForm.get('doseType')?.touched" class="invalid-tooltip">Selecione o tipo da dose</div>
+            </label>
+            <div class="text-center">
+              <button type="submit" [disabled]="loading || createForm.invalid" class="btn btn-primary">
+                {{ loading ? 'Salvando' : 'Salvar' }}
+                <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+              </button>
+            </div>
+          </form>
+    </div>
+</div>

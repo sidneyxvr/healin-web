@@ -1,0 +1,46 @@
+<div class="content-list itens-3">
+     <div *ngIf="patient" id="patient">
+          <img [src]="patient.imagePath" (error)="errorHandler($event)"/>
+          <div>
+               <h5>{{patient.name}}</h5>
+               <h6 style="color: #a5a5a5;">{{patient.birthDate | date:'dd/MM/yyyy'}}</h6>
+          </div>
+     </div>
+     <br/>
+     <div class="table">
+          <div class="thead">
+          <div class="row">
+               <div class="col-md-2 p-2">Descrição</div>
+               <div class="col-md-2 p-2">Exame</div>
+               <div class="col-md-2 p-2">Data do Exame</div>
+               <div class="col-md-3 p-2">Tipos de Exame</div>
+               <div class="col-md-3 p-2"></div>
+          </div>
+          </div>
+          <div class="tbody">
+               <div class="row" *ngFor="let examResult of examResults" style="position: relative;">
+                    <div class="ccard col-md-2 p-2">
+                         <ng-template #tipDescription><span>{{ examResult.description }}</span></ng-template>
+                         <div class="col-card">Descrição</div>
+                         <div class="dado max-1-lines" [ngbTooltip]="tipDescription">{{ examResult.description }}</div>
+                    </div>
+                    <div class="ccard col-md-2 p-2">
+                         <div class="col-card">Exame</div>
+                         <div class="dado" [title]="examResult.exam">{{ examResult.exam }}</div>
+                    </div>
+                    <div class="ccard col-md-2 p-2">
+                         <div class="col-card">Data do Exame</div>
+                         <div class="dado">{{ examResult.examDate | date: 'dd/MM/yyyy' }}</div>
+                    </div>
+                    <div class="ccard col-md-5 p-2">
+                         <ng-template #tipExamTypes><span class="badge badge-info" *ngFor="let examType of examResult.examTypes">{{ examType.text }}</span></ng-template>
+                    <div class="col-card">Tipos de Exame</div>
+                    <div class="dado max-1-lines" [ngbTooltip]="tipExamTypes"><span class="badge badge-info" *ngFor="let examType of examResult.examTypes">{{ examType.text }}</span></div>
+                    </div>
+                    <div class="ccard col-md-1 actions">
+                         <a title="Visualizar PDF" target="_blank" [href]="examResult.filePath"><i class="fas fa-file-pdf"></i></a>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>

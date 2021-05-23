@@ -1,0 +1,96 @@
+
+<div class="card auth-card">
+  <div class="position-relative image-side patient" > </div>
+  <div class="form-side">
+    <div class="d-flex justify-content-between">
+      <a [routerLink]="['/auth/choose-profile']" routerLinkActive="router-link-active" >
+        <div class="back">
+          <i class="simple-icon-arrow-left"></i>
+        </div>
+      </a>
+      <div class="custom-logo">
+        <img src="/assets/images/logo.png" />
+      </div>
+      <div></div>
+    </div>
+    
+    <form novalidate  (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+      <label class="form-group has-float-label">
+        <input class="form-control" name="name" formControlName="name"/>
+        <span>Nome</span>
+        <div *ngIf="registerForm.get('name')?.errors?.required && registerForm.get('name')?.touched" class="invalid-tooltip">Informe o nome</div>
+        <div *ngIf="registerForm.get('name')?.errors?.rangeLength && registerForm.get('name')?.touched" class="invalid-tooltip">O nome deve ter entre 5 e 50 caracteres</div>
+      </label>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label class="form-group has-float-label">
+            <input class="form-control" name="cpf" cpf [textMask]="{mask: MASKS.cpf.textMask}" formControlName="cpf"/>
+            <span>CPF</span>
+            <div *ngIf="registerForm.get('cpf')?.errors?.required && registerForm.get('cpf')?.touched" class="invalid-tooltip">Informe o CPF</div>
+              <div *ngIf="registerForm.get('cpf')?.errors?.cpf && registerForm.get('cpf')?.touched" class="invalid-tooltip">CPF inválido</div>
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label class="form-group has-float-label">
+            <input class="form-control" name="susNumber" formControlName="susNumber"/>
+            <span>Número SUS</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row"> 
+        <div class="col-md-6">
+          <label class="form-group has-float-label">
+            <input autocomplete="off" class="form-control" [container]="'html'" bsDatepicker #dp="bsDatepicker" name="birthDate" formControlName="birthDate">
+            <span>Data de Nascimento</span>
+            <div *ngIf="registerForm.get('birthDate')?.errors?.required && registerForm.get('birthDate')?.touched" class="invalid-tooltip">Informe a data de nascimento</div>
+          </label>
+        </div>
+        <div class="col-md-6">
+          <label class="form-group has-float-label">
+            <ng-select [items]="genders" bindLabel="name" bindValue="id" name="gender" formControlName="gender"> </ng-select>
+            <span>Sexo</span>
+            <div *ngIf="registerForm.get('gender')?.errors?.required && registerForm.get('gender')?.touched" class="invalid-tooltip">Informe o sexo</div>
+          </label>
+        </div>  
+      </div>
+
+      <label class="form-group has-float-label">
+        <input class="form-control" name="phone" telefone #telefone [textMask]="{mask: MASKS.telefone.textMaskFunction}" formControlName="phone"/>
+        <span>Telefone</span>
+        <div *ngIf="registerForm.get('phone')?.errors?.required && registerForm.get('phone')?.touched" class="invalid-tooltip">Informe o telefone</div>
+        <div *ngIf="registerForm.get('phone')?.errors?.telefone && registerForm.get('phone')?.touched" class="invalid-tooltip">Telefone inválido</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" name="email" formControlName="email"/>
+        <span>Email</span>
+        <div *ngIf="registerForm.get('email')?.errors?.required && registerForm.get('email')?.touched" class="invalid-tooltip">Informe o email</div>
+        <div *ngIf="registerForm.get('email')?.errors?.email && registerForm.get('email')?.touched" class="invalid-tooltip">Email inválido</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" type="password" name="password" formControlName="password"/>
+        <span>Senha</span>
+        <div *ngIf="registerForm.get('password')?.errors?.required && registerForm.get('password')?.touched" class="invalid-tooltip">Informe a senha</div>
+        <div *ngIf="registerForm.get('password')?.errors?.rangeLength && registerForm.get('password')?.touched" class="invalid-tooltip">A senha deve ter entre 6 e 15 caracteres</div>
+      </label>
+      <label class="form-group has-float-label">
+        <input class="form-control" type="password" name="confirmPassword" formControlName="confirmPassword"/>
+        <span>Confirmar Senha</span>
+        <div *ngIf="registerForm.get('confirmPassword')?.errors?.required && registerForm.get('confirmPassword')?.touched" class="invalid-tooltip">Informe a senha</div>
+        <div *ngIf="registerForm.get('confirmPassword')?.errors?.equalTo && registerForm.get('confirmPassword')?.touched" class="invalid-tooltip">As senhas não conferem</div>
+      </label>
+      <div class="d-flex justify-content-between align-items-center">
+        <a routerLink="/auth/login">Fazer login</a>
+        <button type="submit" [disabled]="loading" class="btn btn-primary">
+          {{ loading ? 'Registrando' : 'Registrar' }}
+          <i class="fa fa-spinner fa-spin" *ngIf="loading" style="margin-left: 5px;"></i>
+        </button>
+      </div>
+    </form >
+
+  </div>
+</div>
+
+
+<!-- <simple-notifications></simple-notifications> -->

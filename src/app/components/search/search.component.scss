@@ -1,0 +1,91 @@
+@import '../../../variables';
+
+.actions{
+    color: $muted-text-color;
+    margin: 30px 0;
+
+    .order-by{
+        min-width: 150px;
+    }
+
+    .searchable{
+        @media (max-width: $breakpoint-xs) {
+            flex-direction: column !important;
+            .d-inline-flex {
+                justify-content: space-between !important;
+                margin-bottom: 20px !important;
+            }
+
+            .search{
+                justify-content: right;
+            }
+        }
+
+        .ng-select, input{
+            max-width: 200px !important;
+            width: 50%;
+        }
+    }
+
+    .add{
+        @media (max-width: $breakpoint-xs) {
+            position: fixed;
+            -webkit-box-shadow: 0px 0px 5px 0px lighten($color: $muted-text-color, $amount: 20%) !important;
+            -moz-box-shadow: 0px 0px 5px 0px lighten($color: $muted-text-color, $amount: 20%) !important;
+            box-shadow: 0px 0px 5px 0px lighten($color: $muted-text-color, $amount: 20%) !important;
+            bottom: 70px;
+            right: 20px;
+            border-radius: 50px !important;
+            height: 50px;
+            width: 50px;
+            z-index: 3;
+            i{
+                position: relative;
+                left: -40%;
+                font-size: 1.5em;
+            }
+
+            &::after{
+                content: none !important;
+            }
+        }
+
+        @media (min-width: $breakpoint-xs) {
+            &::after{
+                content: ' Adicionar' !important;
+            }
+        }
+    }
+
+    .search {
+        @media (max-width: $breakpoint-xs) {
+            .input-group{
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        input{
+            max-width: 200px;
+            padding-right: 40px;
+        }
+
+        span{
+            button{
+                position: relative;
+                min-width: 30px !important;
+                max-width: 30px !important;
+                margin: 0 0 0 -30px !important;
+                padding-left: 0 !important;
+                z-index: 3;
+                color: $primary;
+            }
+        }
+    }
+
+    .itens-per-page{
+        align-items: center;
+        .ng-select{
+            min-width: 60px;
+        }
+    }
+}
