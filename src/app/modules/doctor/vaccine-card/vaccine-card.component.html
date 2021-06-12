@@ -1,0 +1,28 @@
+<div class="content-list itens-3">
+    <a [routerLink]="['/doctor/patient/list']" routerLinkActive="router-link-active" >
+        <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+        </div>
+    </a>
+    <div *ngIf="patient" id="patient">
+        <img [src]="patient.imagePath" (error)="errorHandler($event)"/>
+        <div>
+             <h5>{{patient.name}}</h5>
+             <h6 style="color: #a5a5a5;">{{patient.birthDate | date:'dd/MM/yyyy'}}</h6>
+        </div>
+   </div>
+
+   <h3>Cartão de Vacina</h3>
+
+    <div *ngIf="doses">
+        <div *ngFor="let dose of doses" class="vaccine-card">
+            <h3>{{dose.item1}}</h3>
+            <div class="dose">
+                <div *ngFor="let vaccine of dose.item2" class="vaccine">
+                    <span>{{vaccine.doseTypeDescription}}</span><br>
+                    <h6>{{vaccine.doseDate | date:'dd/MM/yyyy'}}</h6>
+                </div>
+            <div>
+        </div>
+    </div>
+</div>

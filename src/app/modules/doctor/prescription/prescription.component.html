@@ -1,0 +1,54 @@
+<div class="content-list itens-5">
+    <a [routerLink]="['/doctor/patient/list']" routerLinkActive="router-link-active" >
+        <div class="back">
+            <i class="simple-icon-arrow-left"></i>
+        </div>
+    </a>
+    <div *ngIf="patient" id="patient">
+        <img [src]="patient.imagePath" (error)="errorHandler($event)"/>
+        <div>
+             <h5>{{patient.name}}</h5>
+             <h6 style="color: #a5a5a5;">{{patient.birthDate | date:'dd/MM/yyyy'}}</h6>
+        </div>
+    </div>
+
+    <h3>Receituários Médico</h3>
+
+    <div class="table">
+        <div class="thead">
+            <div class="row">
+                <div class="col-md-4 p-2">Descrição</div>
+                <div class="col-md-2 p-2">Data da Consulta</div>
+                <div class="col-md-2 p-2">Especialidade</div>
+                <div class="col-md-3 p-2">Tipo da Receita</div>
+                <div class="col-md-1 p-2"></div>
+            </div>
+        </div>
+        <div class="tbody">
+            <div class="row" *ngFor="let prescription of prescriptions" style="position: relative;">
+                <div class="ccard col-md-4 p-2">
+                    <div class="col-card">Descrição</div>
+                    <div class="dado max-1-lines" [title]="prescription.description">{{ prescription.description }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Data da Consulta</div>
+                    <div class="dado">{{ prescription.prescriptionDate | date: 'dd/MM/yyyy' }}</div>
+                </div>
+                <div class="ccard col-md-2 p-2">
+                    <div class="col-card">Especialidade</div>
+                    <div class="dado">{{ prescription.specialty.text }}</div>
+                </div>
+                <div class="ccard col-md-3 p-2">
+                    <div class="col-card">Tipo da Receita</div>
+                    <div class="dado max-1-lines">{{prescription.prescriptionTypeDescription}}</div>
+                </div>
+                <div class="ccard col-md-1 actions">
+                    <a title="Visualizar PDF" target="_blank" [href]="prescription.filePath"><i class="fas fa-file-pdf"></i></a>
+               </div>
+            </div>
+        </div>
+    </div>
+
+    <app-pagination *ngIf="amount > 0" [(page)]="page" [pageSize]="pageSize" [collectionSize]="amount" (getPaged)="getPaged()"></app-pagination>
+
+</div>

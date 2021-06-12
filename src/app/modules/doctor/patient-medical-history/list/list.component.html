@@ -1,4 +1,9 @@
 <div class="content-list itens-3">
+     <a [routerLink]="['/doctor/patient/list']" routerLinkActive="router-link-active" >
+          <div class="back">
+              <i class="simple-icon-arrow-left"></i>
+          </div>
+      </a>
      <div *ngIf="patient" id="patient">
           <img [src]="patient.imagePath" (error)="errorHandler($event)"/>
           <div>
@@ -6,7 +11,7 @@
                <h6 style="color: #a5a5a5;">{{patient.birthDate | date:'dd/MM/yyyy'}}</h6>
           </div>
      </div>
-     <br/>
+     <h3>Resultados de Exames</h3>
      <div class="table">
           <div class="thead">
           <div class="row">

@@ -1,4 +1,4 @@
-<div id="content">
+<div class="content-list itens-5">
     <h2>Pacientes</h2>
 
     <app-search 
@@ -19,6 +19,8 @@
                         <h6 style="color: #a5a5a5;">{{ patient.birthDate | date:'dd/MM/yyyy' }}</h6>
                     </div>
                 <a href="javascript:;" class="btn btn-primary" [routerLink]="['/doctor/patient-medical-history/', patient.id]" routerLinkActive="router-link-active" style="margin-top: 20px;">Visualizar Histórico</a>
+                <a href="javascript:;" class="btn btn-primary" [routerLink]="['/doctor/vaccine-card/', patient.id]" routerLinkActive="router-link-active" style="margin-top: 20px;">Cartão de vacina</a>
+                <a href="javascript:;" class="btn btn-primary" [routerLink]="['/doctor/prescription/', patient.id]" routerLinkActive="router-link-active" style="margin-top: 20px;">Prescrição médica</a>
                 </div>
             </div>
         </div>

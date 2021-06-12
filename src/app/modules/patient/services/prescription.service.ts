@@ -1,6 +1,5 @@
 import { SelectItem } from './../../../utils/select-item';
 import { Prescription } from './../models/prescription';
-import { ExamResult } from './../models/exam-result';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 
